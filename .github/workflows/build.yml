@@ -1,0 +1,31 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile --tag ees16/simccs:latest
+        mkdir deploy/
+        docker run -it \
+          -v $(pwd)/deploy:/java/dev/share \
+          ees16/simccs:latest \
+          /bin/bash -c "cp /java/dev/build/SimCCS.jar /java/dev/share/"
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: SimCCS.jar
+        path: ./deploy/SimCCS.jar
+        if-no-files-found: error
+        retention-days: 30

@@ -18,7 +18,7 @@ jobs:
       run: |
         docker build . --file Dockerfile --tag ees16/simccs:latest
         mkdir deploy/
-        docker run -it \
+        docker run \
           -v $(pwd)/deploy:/java/dev/share \
           ees16/simccs:latest \
           /bin/bash -c "cp /java/dev/build/SimCCS.jar /java/dev/share/"

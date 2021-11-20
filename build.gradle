@@ -10,6 +10,10 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven {
+         url = uri("https://jitpack.io")
+    }
+    jcenter()
 }
 
 dependencies {
@@ -17,6 +21,7 @@ dependencies {
     runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:win"
     runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:linux"
     runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:mac"
+    implementation 'com.github.OpenMap-java:openmap:v5.1.15'
 }
 
 javafx {

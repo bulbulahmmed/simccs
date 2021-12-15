@@ -4,10 +4,19 @@ plugins {
     //id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
+application {
+    applicationDefaultJvmArgs = [
+        "--add-modules=ALL-MODULE-PATH",
+        "--add-exports", "javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED",
+        "--add-exports", "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED"
+        //"-XX:MaxRAMFraction=1", "-verbosegc", "-XX:+HeapDumpOnOutOfMemoryError", "-XX:MaxMetaspaceSize=512m", "-XX:MaxMetaspaceSize=200g", "-Xms220g", "-Xmx220g", "-XX:ParallelGCThreads=8", "-XX:+UnlockDiagnosticVMOptions"
+    ]
+}
+
 repositories {
-    maven {
-        url = uri("https://jitpack.io")
-    }
+    //maven {
+    //    url = uri("https://jitpack.io")
+    //}
     mavenCentral()
 }
 

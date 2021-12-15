@@ -1,0 +1,45 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+    //id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+repositories {
+    maven {
+        url = uri("https://jitpack.io")
+    }
+    mavenCentral()
+}
+
+dependencies {
+    /* uncomment for cross-platform jar: */
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:win"
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:linux"
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:mac"
+    implementation "com.github.OpenMap-java:openmap:v5.1.15"
+    implementation "com.google.guava:guava:29.0-jre"
+    implementation "junit:junit:4.13"
+}
+
+javafx {
+    version = "16"
+    modules = [
+        'javafx.controls',
+        'javafx.fxml',
+        'javafx.swing',
+        'javafx.base',
+        'javafx.graphics',
+        'javafx.web'
+    ]
+}
+
+mainClassName = 'gui.Gui'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'gui.Launcher'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
